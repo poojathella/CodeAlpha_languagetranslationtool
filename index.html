@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Language Translator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- ===== LANDING PAGE ===== -->
+  <section id="landing" class="page active">
+    <div class="orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <div class="landing-content">
+      <div class="badge-pill">
+        <span class="badge-dot"></span>
+        Powered by AI Translation
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line line-1">AI Language</span>
+        <span class="line line-2">Translator</span>
+      </h1>
+
+      <p class="hero-sub">
+        Translate anything instantly — with voice input,<br/>
+        auto-detection &amp; text-to-speech across 20+ languages.
+      </p>
+
+      <div class="landing-actions">
+        <button class="btn-enter" id="enterBtn" onclick="showTranslator()">
+          <span class="btn-enter-text">Start Translating</span>
+          <span class="btn-enter-icon"><i class="fa-solid fa-arrow-right"></i></span>
+        </button>
+        <p class="hint-text">No sign-up required · Free to use</p>
+      </div>
+
+      <div class="feature-pills">
+        <div class="pill pill-1"><i class="fa-solid fa-microphone"></i> Voice Input</div>
+        <div class="pill pill-2"><i class="fa-solid fa-volume-high"></i> Text-to-Speech</div>
+        <div class="pill pill-3"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto Detect</div>
+        <div class="pill pill-4"><i class="fa-solid fa-copy"></i> Copy Output</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRANSLATOR PAGE ===== -->
+  <section id="translator" class="page">
+    <div class="orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <!-- Top Nav -->
+    <nav class="topnav">
+      <button class="nav-back" onclick="showLanding()">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>Back</span>
+      </button>
+      <div class="nav-brand">
+        <i class="fa-solid fa-language nav-icon"></i>
+        <span>LinguaAI</span>
+      </div>
+      <div class="nav-spacer"></div>
+    </nav>
+
+    <!-- Status Bar -->
+    <div id="statusBar" class="status-bar hidden">
+      <div class="status-icon-wrap">
+        <i id="statusIcon" class="fa-solid fa-circle-info"></i>
+      </div>
+      <span id="statusText">Ready</span>
+    </div>
+
+    <!-- Main Translator Card -->
+    <div class="translator-wrap">
+
+      <!-- Language Selectors Row -->
+      <div class="lang-row">
+        <div class="lang-select-wrap">
+          <label class="lang-label"><i class="fa-solid fa-globe"></i> Source</label>
+          <select id="sourceLang" class="lang-select">
+            <option value="auto">Auto Detect</option>
+            <option value="en">English</option>
+            <option value="hi">Hindi — हिन्दी</option>
+            <option value="te">Telugu — తెలుగు</option>
+            <option value="ml">Malayalam — മലയാളം</option>
+            <option value="kn">Kannada — ಕನ್ನಡ</option>
+            <option value="ur">Urdu — اردو</option>
+            <option value="ru">Russian — Русский</option>
+            <option value="ja">Japanese — 日本語</option>
+            <option value="zh">Chinese — 中文</option>
+            <option value="de">German — Deutsch</option>
+            <option value="es">Spanish — Español</option>
+            <option value="fr">French — Français</option>
+            <option value="ar">Arabic — العربية</option>
+            <option value="pt">Portuguese — Português</option>
+            <option value="it">Italian — Italiano</option>
+            <option value="ko">Korean — 한국어</option>
+            <option value="tr">Turkish — Türkçe</option>
+            <option value="pl">Polish — Polski</option>
+            <option value="nl">Dutch — Nederlands</option>
+            <option value="sv">Swedish — Svenska</option>
+          </select>
+        </div>
+
+        <button class="swap-btn" id="swapBtn" onclick="swapLanguages()" title="Swap languages">
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        </button>
+
+        <div class="lang-select-wrap">
+          <label class="lang-label"><i class="fa-solid fa-flag"></i> Target</label>
+          <select id="targetLang" class="lang-select">
+            <option value="hi">Hindi — हिन्दी</option>
+            <option value="en">English</option>
+            <option value="te">Telugu — తెలుగు</option>
+            <option value="ml">Malayalam — മലയാളം</option>
+            <option value="kn">Kannada — ಕನ್ನಡ</option>
+            <option value="ur">Urdu — اردو</option>
+            <option value="ru">Russian — Русский</option>
+            <option value="ja">Japanese — 日本語</option>
+            <option value="zh">Chinese — 中文</option>
+            <option value="de">German — Deutsch</option>
+            <option value="es">Spanish — Español</option>
+            <option value="fr">French — Français</option>
+            <option value="ar">Arabic — العربية</option>
+            <option value="pt">Portuguese — Português</option>
+            <option value="it">Italian — Italiano</option>
+            <option value="ko">Korean — 한국어</option>
+            <option value="tr">Turkish — Türkçe</option>
+            <option value="pl">Polish — Polski</option>
+            <option value="nl">Dutch — Nederlands</option>
+            <option value="sv">Swedish — Svenska</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Detected Language Tag -->
+      <div id="detectedTag" class="detected-tag hidden">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Detected: <strong id="detectedLangName">—</strong>
+      </div>
+
+      <!-- Romanized language tip banner -->
+      <div id="romanTip" class="roman-tip hidden">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>Typing in Roman script? <strong>Select source language manually</strong> for accurate translation.</span>
+        <button onclick="document.getElementById('romanTip').classList.add('hidden')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Text Panels -->
+      <div class="panels">
+
+        <!-- Input Panel -->
+        <div class="panel panel-input">
+          <div class="panel-header">
+            <span class="panel-label">Input</span>
+            <div class="panel-actions">
+              <button class="panel-btn" id="voiceBtn" onclick="startVoiceInput()" title="Voice input">
+                <i class="fa-solid fa-microphone"></i>
+              </button>
+              <button class="panel-btn" onclick="clearInput()" title="Clear">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+          <textarea
+            id="inputText"
+            class="text-area"
+            placeholder="Type or speak your text here…"
+            maxlength="2000"
+            oninput="updateCharCount(); checkRomanScript(this.value);"
+          ></textarea>
+          <div class="panel-footer">
+            <span id="charCount" class="char-count">0 / 2000</span>
+            <button class="translate-btn" onclick="translateText()">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Translate</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="panel panel-output">
+          <div class="panel-header">
+            <span class="panel-label">Translation</span>
+            <div class="panel-actions">
+              <button class="panel-btn" id="speakBtn" onclick="speakOutput()" title="Speak translation">
+                <i class="fa-solid fa-volume-high"></i>
+              </button>
+              <button class="panel-btn" onclick="copyOutput()" title="Copy">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+          </div>
+          <div class="output-area-wrap">
+            <textarea
+              id="outputText"
+              class="text-area output-text"
+              placeholder="Translation will appear here…"
+              readonly
+            ></textarea>
+            <!-- Loader overlay -->
+            <div id="loaderOverlay" class="loader-overlay hidden">
+              <div class="loader-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring ring-2"></div>
+                <div class="spinner-ring ring-3"></div>
+              </div>
+              <p class="loader-label">Translating…</p>
+            </div>
+          </div>
+          <div class="panel-footer panel-footer-right">
+            <span id="copyToast" class="copy-toast hidden">
+              <i class="fa-solid fa-check"></i> Copied!
+            </span>
+          </div>
+        </div>
+
+      </div><!-- /panels -->
+
+    </div><!-- /translator-wrap -->
+
+    <p class="footer-note">
+      Translation powered by <strong>Google Translate</strong> · Speech via Web Speech API
+    </p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
